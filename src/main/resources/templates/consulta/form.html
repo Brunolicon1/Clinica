@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main}, ~{fragments/header :: header(null)})}">
+
+<head th:replace="~{fragments/head :: head(~{::link},~{::title})}">
+    <title>Formulário de Consulta</title>
+    <link>
+</head>
+
+<body>
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Agendar Consulta</h1>
+
+        <form class="w-50 mx-auto" id="formConsulta"
+              th:action="${consulta.id == null} ? @{/consulta/save} : @{/consulta/update}"
+              th:object="${consulta}"
+              method="post"
+              novalidate>
+            <input th:field="*{id}" type="hidden">
+
+            <div class="mb-3">
+                <label class="form-label" for="medicoSelect">Selecione o Médico:</label>
+                <select class="form-select" id="medicoSelect" th:field="*{medico.id}" th:errorclass="is-invalid">
+                    <option value=""  >Selecione um médico</option>
+                    <option  th:each="m : ${medicos}" th:value="${m.id}" th:text="${m.nome}"></option>
+                </select>
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('medico.id')}" th:errors="*{medico.id}"></label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="pacienteSelect">Selecione o Paciente:</label>
+                <select class="form-select" id="pacienteSelect"  th:field="*{paciente.id}" th:errorclass="is-invalid">
+                    <option value=""  >Selecione um paciente</option>
+                    <option th:each="p : ${pacientes}" th:value="${p.id}" th:text="${p.nome}"></option>
+                </select>
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('paciente.id')}" th:errors="*{paciente.id}"></label>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="">Data da Consulta:</label>
+                <input class="form-control" placeholder="Data da Consulta"  th:field="*{data} " th:errorclass="is-invalid"
+                       type="date">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="valor">Valor da Consulta:</label>
+                <input class="form-control" placeholder="Digite o valor da consulta"
+                       th:field="*{valor}" type="number" th:errorclass="is-invalid">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="">Observações:</label>
+                <textarea class="form-control" placeholder="Digite observações (opcional)" rows="3"
+                          th:field="*{observacao}"></textarea>
+            </div>
+
+            <div class="mb-3 text-center">
+                <input class="btn btn-primary" type="submit" value="Agendar">
+            </div>
+        </form>
+
+
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main}, ~{fragments/header :: header(null)})}">
+
+<head th:replace="~{fragments/head :: head(~{::link},~{::title})}">
+    <title>Página Inicial</title>
+    <link>
+</head>
+<body>
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Página Inicial</h1>
+
+        <div class="row justify-content-center">
+            <!-- Paciente -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Paciente</h5>
+                        <a href="/paciente/form" class="btn btn-primary mb-2 w-75">Cadastrar</a><br>
+                        <a href="/paciente/list" class="btn btn-primary w-75">Listar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Médico -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Médico</h5>
+                        <a href="/medico/form" class="btn btn-success mb-2 w-75">Cadastrar</a><br>
+                        <a href="/medico/list" class="btn btn-success w-75">Listar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consulta -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Consulta</h5>
+                        <a href="/consulta/form" class="btn btn-info text-white mb-2 w-75">Cadastrar</a><br>
+                        <a href="/consulta/list" class="btn btn-info text-white w-75">Listar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

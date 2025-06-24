@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main}, ~{})}">
+
+<head th:replace="~{fragments/head :: head(~{::link},~{::title})}">
+    <title>Formulário de Paciente</title>
+    <link>
+
+</head>
+<body>
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Cadastro de Paciente</h1>
+
+        <form th:action="${paciente.id == null} ? @{/paciente/save} : @{/paciente/update}"
+              th:object="${paciente}"
+              method="post"
+              class="needs-validation"
+              novalidate>
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" class="form-control"
+                       th:errorclass="is-invalid"
+                       placeholder="Digite o nome do paciente" >
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></label>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" id="telefone" th:field="*{telefone}" class="form-control"
+                       th:errorclass="is-invalid"
+                       placeholder="(99) 99999-9999"
+                       pattern="^\(\d{2}\) \d{4,5}-\d{4}$"
+                       >
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></label>
+
+            </div>
+
+            <div class="mb-3 text-center">
+                <input type="submit" value="Salvar" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+</main>
+</body>
+</html>

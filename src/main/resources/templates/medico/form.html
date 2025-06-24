@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main}, ~{fragments/header :: header(null)})}">
+
+<head th:replace="~{fragments/head :: head(~{::link},~{::title})}">
+<title>Formulário de Médico</title>
+<link>
+</head>
+
+<body>
+<main>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Cadastro de Médico</h1>
+
+        <!-- Formulário de Cadastro -->
+        <form th:action="${medico.id == null} ? @{/medico/save} : @{/medico/update}"
+              th:object="${medico}"
+              method="post"
+              class="needs-validation"
+              novalidate>
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" th:field="*{nome}"
+                       th:errorclass="is-invalid"
+                       placeholder="Digite o nome do médico" >
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></label>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="crm" class="form-label">CRM</label>
+                <input type="text" class="form-control" id="crm" th:field="*{crm}"
+                       th:errorclass="is-invalid"
+                       placeholder="CRM123456">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></label>
+            </div>
+
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+
+</main>
+</body>
+
+</html>
